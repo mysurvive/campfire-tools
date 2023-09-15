@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "types": [
+      "@league-of-foundry-developers/foundry-vtt-types",
+      "jest",
+      "foundryvtt-simple-calendar"
+    ],
+    "lib": ["DOM", "ESNext"],
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "rootDir": "src/",
+    "outDir": "dist/module"
+  },
+  "include": ["src/**/*"]
+}
