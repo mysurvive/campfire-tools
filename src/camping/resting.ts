@@ -5,7 +5,7 @@ import {
   removeActorsEffectsByName,
   removeActorsEffectsByUuid,
 } from "./actor";
-import { Camping, getCampingActivityData, rollCampingCheck } from "./camping";
+import { Camping, rollCampingCheck } from "./camping";
 import { saveCamping } from "./storage";
 import { getAllExpiringMealEffectUuids } from "./recipes";
 import { getRecipeData } from "./eating";
