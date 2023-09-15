@@ -35,6 +35,7 @@ const staticFiles = [
   "weather",
   "templates",
   "module.json",
+  "packs",
 ];
 
 /********************/
