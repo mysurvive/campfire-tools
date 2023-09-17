@@ -202,10 +202,6 @@ const combatEffects: Partial<Record<CampingActivityName, CombatEffect>> = {
     uuid: "@UUID[Compendium.campfire-tools.kingmaker-tools-camping-effects.PSBOS7ZEl9RGWBqD]{Set Traps}",
     target: "Enemies",
   },
-  "Undead Guardians": {
-    uuid: "@UUID[Compendium.campfire-tools.kingmaker-tools-camping-effects.KysTaC245mOnSnmE]{Undead Guardians}",
-    target: "1 Ally",
-  },
   "Water Hazards": {
     uuid: "@UUID[Compendium.campfire-tools.kingmaker-tools-camping-effects.LN6mH7Muj4hgvStt]{Water Hazards}",
     target: "Enemies",

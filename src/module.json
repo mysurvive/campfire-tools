@@ -105,6 +105,16 @@
       "flags": {},
       "banner": "systems/pf2e/assets/compendium-banner/red.webp",
       "system": "pf2e"
+    },
+    {
+      "name": "kingmaker-tools-companions",
+      "path": "packs/kingmaker-tools-companions",
+      "label": "Companions",
+      "type": "Actor",
+      "private": false,
+      "flags": {},
+      "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+      "system": "pf2e"
     }
   ],
   "packFolders": [

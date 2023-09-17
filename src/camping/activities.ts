@@ -23,61 +23,19 @@ export const allCampingActivityNames = [
   "Blend Into The Night",
   "Bolster Confidence",
   "Camp Management",
-  "Dawnflower's Blessing",
   "Enhance Campfire",
   "Enhance Weapons",
   "Intimidating Posture",
   "Maintain Armor",
   "Set Alarms",
   "Set Traps",
-  "Undead Guardians",
   "Water Hazards",
   "Wilderness Survival",
-  "Influence Amiri",
-  "Discover Amiri",
-  "Influence Ekundayo",
-  "Discover Ekundayo",
-  "Influence Jubilost",
-  "Discover Jubilost",
-  "Influence Linzi",
-  "Discover Linzi",
-  "Influence Nok-Nok",
-  "Discover Nok-Nok",
-  "Influence Tristian",
-  "Discover Tristian",
-  "Influence Valerie",
-  "Discover Valerie",
-  "Influence Harrim",
-  "Discover Harrim",
-  "Influence Jaethal",
-  "Discover Jaethal",
-  "Influence Kalikke",
-  "Discover Kalikke",
-  "Influence Kanerah",
-  "Discover Kanerah",
-  "Influence Octavia",
-  "Discover Octavia",
-  "Influence Regongar",
-  "Discover Regongar",
 ] as const;
 
 export type CampingActivityName = (typeof allCampingActivityNames)[number];
 
-export const allCompanionNames = [
-  "Amiri",
-  "Ekundayo",
-  "Jubilost",
-  "Linzi",
-  "Nok-Nok",
-  "Tristian",
-  "Valerie",
-  "Harrim",
-  "Jaethal",
-  "Kalikke",
-  "Kanerah",
-  "Octavia",
-  "Regongar",
-] as const;
+export const allCompanionNames = [] as const;
 
 export type CompanionNames = (typeof allCompanionNames)[number];
 
@@ -426,20 +384,6 @@ export const allCampingActivities: CampingActivityData[] = [
     },
   },
   {
-    name: "Dawnflower's Blessing",
-    journalUuid:
-      "Compendium.campfire-tools.kingmaker-tools-journals.JournalEntry.uSTTCqRYCWj7a38F.JournalEntryPage.X4ggcXUe0wPiW4jt",
-    isLocked: true,
-    isSecret: false,
-    skillRequirements: [],
-    skills: [],
-    effectUuids: [
-      {
-        uuid: "Compendium.campfire-tools.kingmaker-tools-camping-effects.Item.eaWmjDOIvUF9aDbq",
-      },
-    ],
-  },
-  {
     name: "Enhance Campfire",
     journalUuid:
       "Compendium.campfire-tools.kingmaker-tools-journals.JournalEntry.uSTTCqRYCWj7a38F.JournalEntryPage.ytyW9F39m7xf0gx5",
@@ -498,15 +442,6 @@ export const allCampingActivities: CampingActivityData[] = [
     name: "Set Traps",
     journalUuid:
       "Compendium.campfire-tools.kingmaker-tools-journals.JournalEntry.uSTTCqRYCWj7a38F.JournalEntryPage.5ynOh085kwNp75t4",
-    isLocked: true,
-    isSecret: false,
-    skillRequirements: [],
-    skills: [],
-  },
-  {
-    name: "Undead Guardians",
-    journalUuid:
-      "Compendium.campfire-tools.kingmaker-tools-journals.JournalEntry.uSTTCqRYCWj7a38F.JournalEntryPage.YzOixXzCwfXOBjtx",
     isLocked: true,
     isSecret: false,
     skillRequirements: [],
