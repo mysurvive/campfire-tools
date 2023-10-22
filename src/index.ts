@@ -12,7 +12,6 @@ import { toTimeOfDayMacro } from "./time/app";
 import { getBooleanSetting, getStringSetting /*setSetting*/ } from "./settings";
 import { rollKingmakerWeather } from "./weather/roll-weather";
 import { rollExplorationSkillCheck, rollSkillDialog } from "./skill-checks";
-//import {StringDegreeOfSuccess} from './degree-of-success';
 import { openCampingSheet } from "./camping/sheet";
 import { bindCampingChatEventListeners } from "./camping/chat";
 import { getDiffListeners } from "./camping/effect-syncing";
@@ -101,14 +100,6 @@ Hooks.on("ready", async () => {
         scope: "world",
       },
     );
-    gameInstance.settings.register("campfire-tools", "enableCombatTracks", {
-      name: "Enable Combat Tracks",
-      hint: 'If enabled, starts a combat track depending on the current region, actor or scene. Region combat tracks have to be named after the region, e.g. "Kingmaker.Rostland Hinterlands"; "Kingmaker.Default" is played if no region playlist is found instead',
-      scope: "world",
-      config: true,
-      default: true,
-      type: Boolean,
-    } as any);
     gameInstance.settings.register<string, string, boolean>(
       "campfire-tools",
       "enableWeather",
@@ -207,89 +198,6 @@ Hooks.on("ready", async () => {
         type: String,
       },
     );
-    gameInstance.settings.register<string, string, string>(
-      "campfire-tools",
-      "kingdomEventRollMode",
-      {
-        name: "Kingdom Events Roll Mode",
-        scope: "world",
-        config: true,
-        default: "gmroll",
-        type: String,
-        choices: rollModeChoices,
-      },
-    );
-    gameInstance.settings.register("campfire-tools", "kingdomEventsTable", {
-      name: "Kingdom Events Table Name",
-      scope: "world",
-      config: true,
-      default: "Kingdom Events",
-      type: String,
-    });
-    gameInstance.settings.register("campfire-tools", "kingdomCultTable", {
-      name: "Kingdom Cult Events Table Name",
-      scope: "world",
-      config: true,
-      default: "Random Cult Events",
-      type: String,
-    });
-    gameInstance.settings.register("campfire-tools", "vanceAndKerensharaXP", {
-      name: "Enable Vance and Kerenshara XP rules",
-      hint: "Adds additional Milestone Events, more XP for claiming hexes and RP",
-      scope: "world",
-      config: true,
-      default: false,
-      requiresReload: true,
-      type: Boolean,
-    } as any);
-    gameInstance.settings.register(
-      "campfire-tools",
-      "kingdomAlwaysAddHalfLevel",
-      {
-        name: "Always add half Level to Skill",
-        hint: "If enabled, always adds half of the kingdom's level to a skill, even if it is untrained",
-        scope: "world",
-        config: true,
-        default: false,
-        requiresReload: true,
-        type: Boolean,
-      } as any,
-    );
-    gameInstance.settings.register("campfire-tools", "kingdomAlwaysAddLevel", {
-      name: "Always add Level to Skill",
-      hint: "If enabled, always adds the kingdom's level to a skill, even if it is untrained. Overrides Always add half Level to Skill",
-      scope: "world",
-      config: true,
-      default: false,
-      requiresReload: true,
-      type: Boolean,
-    } as any);
-    gameInstance.settings.register(
-      "campfire-tools",
-      "kingdomSkillIncreaseEveryLevel",
-      {
-        name: "Double Skill Increases",
-        hint: "If enabled, adds Skill Increases for all even levels from level 2 onwards",
-        scope: "world",
-        config: true,
-        default: false,
-        requiresReload: true,
-        type: Boolean,
-      } as any,
-    );
-    gameInstance.settings.register(
-      "campfire-tools",
-      "kingdomAllStructureItemBonusesStack",
-      {
-        name: "All Structure Item Bonuses Stack",
-        hint: "If enabled, groups item bonuses from all structures, regardless of if they are same building type",
-        scope: "world",
-        config: true,
-        default: false,
-        requiresReload: true,
-        type: Boolean,
-      } as any,
-    );
     gameInstance.settings.register<string, string, number>(
       "campfire-tools",
       "schemaVersion",
@@ -313,9 +221,6 @@ Hooks.on("ready", async () => {
       },
     );
 
-    // migrations
-    /*await migrate(game, getKingdomSheetActor(game), getCampingActor(game));*/
-
     // hooks
     Hooks.on("updateWorldTime", async (_, delta) => {
       if (
@@ -326,9 +231,7 @@ Hooks.on("ready", async () => {
         await rollKingmakerWeather(gameInstance);
       }
     });
-    /*Hooks.on("canvasReady", async () => {
-      await onRenderScene(gameInstance);
-    });*/
+
     Hooks.on(
       "preUpdateScene",
       async (scene: StoredDocument<Scene>, update: Partial<Scene>) => {
@@ -405,23 +308,6 @@ Hooks.on("init", async () => {
   await loadTemplates([
     "modules/campfire-tools/templates/camping/activity.partial.hbs",
     "modules/campfire-tools/templates/camping/eating.partial.hbs",
-    "modules/campfire-tools/templates/army/sidebar.hbs",
-    "modules/campfire-tools/templates/army/status.hbs",
-    "modules/campfire-tools/templates/army/gear.hbs",
-    "modules/campfire-tools/templates/army/effects.hbs",
-    "modules/campfire-tools/templates/army/actions.hbs",
-    "modules/campfire-tools/templates/army/conditions.hbs",
-    "modules/campfire-tools/templates/army/tactics.hbs",
-    "modules/campfire-tools/templates/kingdom/sidebar.hbs",
-    "modules/campfire-tools/templates/kingdom/status.hbs",
-    "modules/campfire-tools/templates/kingdom/skills.hbs",
-    "modules/campfire-tools/templates/kingdom/turn.hbs",
-    "modules/campfire-tools/templates/kingdom/groups.hbs",
-    "modules/campfire-tools/templates/kingdom/feats.hbs",
-    "modules/campfire-tools/templates/kingdom/features.hbs",
-    "modules/campfire-tools/templates/kingdom/settlements.hbs",
-    "modules/campfire-tools/templates/kingdom/settlement.hbs",
-    "modules/campfire-tools/templates/kingdom/effects.hbs",
   ]);
 });
 
@@ -431,72 +317,6 @@ Hooks.on("renderChatLog", () => {
     bindCampingChatEventListeners(gameInstance);
   }
 });
-/*
-type LogEntry = {
-    name: string,
-    icon?: string,
-    condition?: (html: JQuery) => boolean,
-    callback: (html: JQuery) => void,
-};*/
-/*
-
-function getKingdomSheetActor(game: Game): Actor | undefined {
-    return game?.actors?.find(a => a.name === 'Kingdom Sheet');
-}*/
-
-/*
-function ifKingdomActorExists(game: Game, el: HTMLElement, callback: (actor: Actor) => void): void {
-    // TODO: replace this with a data-actor-id lookup in the el
-    const actor = getKingdomSheetActor(game);
-    if (actor) {
-        callback(actor);
-    } else {
-        ui.notifications?.error('Could not find actor with name Kingdom Sheet');
-    }
-}*/
-
-/*Hooks.on('getChatLogEntryContext', (html: HTMLElement, items: LogEntry[]) => {
-    if (game instanceof Game) {
-        const gameInstance = game;
-        const hasActor = (): boolean => getKingdomSheetActor(gameInstance) !== undefined;
-        const hasMeta = (el: JQuery): boolean => hasActor() && el[0]?.querySelector('.km-roll-meta') !== null;
-        const canChangeDegree = (chatMessage: HTMLElement, direction: 'upgrade' | 'downgrade'): boolean => {
-            const cantChangeDegreeUnless: StringDegreeOfSuccess = direction === 'upgrade' ? 'criticalSuccess' : 'criticalFailure';
-            const meta = chatMessage.querySelector('.km-upgrade-result');
-            return hasActor() && meta !== null && parseUpgradeMeta(chatMessage).degree !== cantChangeDegreeUnless;
-        };
-        items.push({
-            name: 'Re-Roll Using Fame/Infamy',
-            icon: '<i class="fa-solid fa-dice-d20"></i>',
-            callback: el => ifKingdomActorExists(gameInstance, el[0] as HTMLElement, (actor) => reRoll(actor, el[0], 'fame')),
-        }, {
-            name: 'Re-Roll',
-            condition: hasMeta,
-            icon: '<i class="fa-solid fa-dice-d20"></i>',
-            callback: el => ifKingdomActorExists(gameInstance, el[0] as HTMLElement, (actor) => reRoll(actor, el[0], 're-roll')),
-        }, {
-            name: 'Re-Roll Keep Higher',
-            condition: hasMeta,
-            icon: '<i class="fa-solid fa-dice-d20"></i>',
-            callback: el => ifKingdomActorExists(gameInstance, el[0] as HTMLElement, (actor) => reRoll(actor, el[0], 'keep-higher')),
-        }, {
-            name: 'Re-Roll Keep Lower',
-            condition: hasMeta,
-            icon: '<i class="fa-solid fa-dice-d20"></i>',
-            callback: el => ifKingdomActorExists(gameInstance, el[0] as HTMLElement, (actor) => reRoll(actor, el[0], 'keep-lower')),
-        }, {
-            name: 'Upgrade Degree of Success',
-            condition: (el: JQuery) => canChangeDegree(el[0] as HTMLElement, 'upgrade'),
-            icon: '<i class="fa-solid fa-arrow-up"></i>',
-            callback: el => ifKingdomActorExists(gameInstance, el[0] as HTMLElement, (actor) => changeDegree(actor, el[0], 'upgrade')),
-        }, {
-            name: 'Downgrade Degree of Success',
-            condition: (el: JQuery) => canChangeDegree(el[0] as HTMLElement, 'downgrade'),
-            icon: '<i class="fa-solid fa-arrow-down"></i>',
-            callback: el => ifKingdomActorExists(gameInstance, el[0] as HTMLElement, (actor) => changeDegree(actor, el[0], 'downgrade')),
-        }, );
-    }
-});*/
 
 function checkCampingErrors(game: Game): void {
   const actor = getCampingActor(game);
