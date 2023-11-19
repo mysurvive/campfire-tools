@@ -19,8 +19,8 @@ regions.set("Riverlands", { zoneDC: 16, encounterDC: 12, level: 2 });
 regions.set("Misty Coast", { zoneDC: 19, encounterDC: 14, level: 4 });
 regions.set("Norster Foothills", { zoneDC: 18, encounterDC: 14, level: 3 });
 regions.set("Yarrin Middle Empire", { zoneDC: 18, encounterDC: 14, level: 3 });
-regions.set("Bragga Highlands", { zoneDC: 19, encounterDC: 20, level: 5 });
-regions.set("Serrarim Forest", { zoneDC: 20, encounterDC: 20, level: 5 });
+regions.set("Bragga Highlands", { zoneDC: 19, encounterDC: 16, level: 5 });
+regions.set("Serrarim Forest", { zoneDC: 20, encounterDC: 14, level: 5 });
 regions.set("Kaldric's Span", { zoneDC: 20, encounterDC: 12, level: 5 });
 regions.set("Serrarim Valley", { zoneDC: 19, encounterDC: 12, level: 4 });
 
