@@ -123,7 +123,7 @@ declare global {
 
   interface ConsumableItem {
     system: {
-      charges: {
+      uses: {
         value: number;
         max: number;
       };

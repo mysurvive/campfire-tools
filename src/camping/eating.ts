@@ -51,8 +51,8 @@ export async function getActorConsumables(
         c.sourceId === basicIngredientsId && basicIngredientsId !== undefined,
     ) as ConsumableItem | undefined;
     result.rations += ration
-      ? ration.system.charges.value +
-        Math.max(0, ration.quantity - 1) * ration.system.charges.max
+      ? ration.system.uses.value +
+        Math.max(0, ration.quantity - 1) * ration.system.uses.max
       : 0;
     result.basicIngredients += basicIngredient ? basicIngredient.quantity : 0;
     result.specialIngredients += specialIngredient
@@ -179,7 +179,7 @@ async function removeRations(actors: Actor[], amount: number): Promise<void> {
         if (remainingToRemove > 0) {
           const system = ration.system;
           const quantity = ration.quantity;
-          const charges = system.charges.value;
+          const charges = system.uses.value;
           const quantitiesOf7 = Math.max(0, quantity - 1);
           const available = quantitiesOf7 * 7 + charges;
           if (remainingToRemove >= available) {
