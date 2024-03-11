@@ -192,8 +192,7 @@ async function removeRations(actors: Actor[], amount: number): Promise<void> {
             updates.push({
               _id: ration.id,
               "system.quantity": leftOverQuantity,
-              "system.charges.value":
-                leftOverCharges === 0 ? 7 : leftOverCharges,
+              "system.uses.value": leftOverCharges === 0 ? 7 : leftOverCharges,
             });
             remainingToRemove = 0;
           }
